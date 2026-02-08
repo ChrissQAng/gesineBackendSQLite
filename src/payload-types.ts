@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     artObjects: ArtObject;
+    vitaSections: VitaSection;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     artObjects: ArtObjectsSelect<false> | ArtObjectsSelect<true>;
+    vitaSections: VitaSectionsSelect<false> | VitaSectionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -194,6 +196,51 @@ export interface ArtObject {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vitaSections".
+ */
+export interface VitaSection {
+  id: number;
+  /**
+   * e.g., "about", "education", "teaching", "grants, prizes, residencies"
+   */
+  title: string;
+  /**
+   * Sections are displayed in ascending order (0 first)
+   */
+  order: number;
+  /**
+   * Individual CV entries within this section
+   */
+  entries?:
+    | {
+        /**
+         * Optional. e.g., "2024", "2018-2017", leave empty to continue previous year
+         */
+        yearOrPeriod?: string | null;
+        text: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        order?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -227,6 +274,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'artObjects';
         value: number | ArtObject;
+      } | null)
+    | ({
+        relationTo: 'vitaSections';
+        value: number | VitaSection;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -324,6 +375,24 @@ export interface ArtObjectsSelect<T extends boolean = true> {
   description?: T;
   vorangestellt?: T;
   orderOfObjects?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vitaSections_select".
+ */
+export interface VitaSectionsSelect<T extends boolean = true> {
+  title?: T;
+  order?: T;
+  entries?:
+    | T
+    | {
+        yearOrPeriod?: T;
+        text?: T;
+        order?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
