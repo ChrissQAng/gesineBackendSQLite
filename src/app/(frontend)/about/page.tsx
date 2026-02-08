@@ -1,12 +1,11 @@
-import { headers as getHeaders } from 'next/headers.js'
 import { getPayload } from 'payload'
 import React from 'react'
 
 import config from '@/payload.config'
+import BackArrow from '@/components/BackArrow/BackArrow'
 import './about.css'
 
 export default async function AboutPage() {
-  const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
@@ -24,9 +23,7 @@ export default async function AboutPage() {
         Video not supported
       </video>
       <div className="content">
-        <a href="/" className="back-arrow">
-          ←
-        </a>
+        <BackArrow />
         <h2>about</h2>
 
         {vitaSections.docs.map((section) => (

@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import BackArrow from '@/components/BackArrow/BackArrow'
 import './views.css'
 
 export default function ViewsPage() {
@@ -25,9 +25,7 @@ export default function ViewsPage() {
 
   return (
     <div className="views-wrapper">
-      <Link href="/" className="back-arrow">
-        ←
-      </Link>
+      <BackArrow />
       <h2>views</h2>
       <img
         src={images[currentImageIndex]}

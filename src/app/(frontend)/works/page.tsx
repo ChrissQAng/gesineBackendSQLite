@@ -1,8 +1,9 @@
-import Link from 'next/link'
 import { getPayload } from 'payload'
 import React from 'react'
 
 import config from '@/payload.config'
+import BackArrow from '@/components/BackArrow/BackArrow'
+import Tile from '@/components/Tile/Tile'
 import './works.css'
 
 export default async function WorksPage() {
@@ -18,24 +19,11 @@ export default async function WorksPage() {
 
   return (
     <div className="worksWrapper">
-      <Link href="/" className="back-arrow">
-        ←
-      </Link>
+      <BackArrow />
       <h2>works</h2>
       <div className="tileGrid">
         {artObjects.docs.map((item) => (
-          <Link key={item.id} href={`/details/${item.id}`} className="tile-wrapper">
-            {item.images && item.images[0] && item.images[0].image && (
-              <img
-                src={
-                  typeof item.images[0].image === 'string'
-                    ? item.images[0].image
-                    : (item.images[0].image as any).url || ''
-                }
-                alt="Artwork"
-              />
-            )}
-          </Link>
+          <Tile key={item.id} object={item as any} />
         ))}
         {artObjects.docs.length === 0 && <p>No works available</p>}
       </div>

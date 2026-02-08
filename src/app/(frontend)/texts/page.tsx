@@ -1,13 +1,12 @@
 import Link from 'next/link'
 import React from 'react'
+import BackArrow from '@/components/BackArrow/BackArrow'
 import './texts.css'
 
 export default async function TextsPage() {
   return (
     <div className="texts-wrapper">
-      <Link href="/" className="back-arrow">
-        ←
-      </Link>
+      <BackArrow />
       <h2>texts</h2>
       <div className="texts-links">
         <Link href="/texts/uhr">

@@ -1,13 +1,11 @@
-import Link from 'next/link'
 import React from 'react'
+import BackArrow from '@/components/BackArrow/BackArrow'
 import './music.css'
 
 export default async function MusicPage() {
   return (
     <div className="music-wrapper">
-      <Link href="/" className="back-arrow">
-        ←
-      </Link>
+      <BackArrow />
       <h2>120 DEN</h2>
       <figure>
         <img src="/images/DSC05275_3_web.jpg" alt="120 DEN" />

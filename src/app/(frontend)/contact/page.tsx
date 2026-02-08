@@ -1,13 +1,12 @@
 import Link from 'next/link'
 import React from 'react'
+import BackArrow from '@/components/BackArrow/BackArrow'
 import './contact.css'
 
 export default async function ContactPage() {
   return (
     <div className="contact-wrapper">
-      <Link href="/" className="back-arrow">
-        ←
-      </Link>
+      <BackArrow color="white" />
       <video playsInline autoPlay loop muted className="fire-video">
         <source src="/fire3.mp4" type="video/mp4" />
         Video not supported

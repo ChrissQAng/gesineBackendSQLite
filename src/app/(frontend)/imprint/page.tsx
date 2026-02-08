@@ -1,13 +1,11 @@
-import Link from 'next/link'
 import React from 'react'
+import BackArrow from '@/components/BackArrow/BackArrow'
 import './imprint.css'
 
 export default async function ImprintPage() {
   return (
     <div className="imprint-wrapper">
-      <Link href="/" className="back-arrow">
-        ←
-      </Link>
+      <BackArrow />
       <h2>impressum</h2>
 
       <p>

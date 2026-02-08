@@ -1,8 +1,8 @@
-import Link from 'next/link'
 import { getPayload } from 'payload'
 import React from 'react'
 
 import config from '@/payload.config'
+import BackArrow from '@/components/BackArrow/BackArrow'
 import './details.css'
 
 interface PageProps {
@@ -22,9 +22,7 @@ export default async function DetailsPage({ params }: PageProps) {
 
   return (
     <div className="detail-wrapper">
-      <Link href="/works" className="back-arrow">
-        ←
-      </Link>
+      <BackArrow />
       <div className="detail">
         {artObject && artObject.images ? (
           artObject.images.map((item, index) => {
@@ -34,7 +32,7 @@ export default async function DetailsPage({ params }: PageProps) {
             const isVideo = mimeType?.startsWith('video/')
 
             return isVideo ? (
-              <video src={mediaUrl} key={index} controls />
+              <video src={mediaUrl} key={index} controls autoPlay loop muted playsInline />
             ) : (
               <img src={mediaUrl} key={index} alt={`Artwork ${index + 1}`} />
             )
